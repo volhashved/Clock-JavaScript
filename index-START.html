@@ -62,12 +62,30 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform: rotate(90deg);
+      transform-origin: 100% 50%; 
     }
 
   </style>
 
   <script>
+    const secHand = document.getElementsByClassName("second-hand")[0];
+    const minHand = document.getElementsByClassName("min-hand")[0];
+    const hourHand = document.getElementsByClassName("hour-hand")[0];    
 
+    function getCurrentTime() {   
+      const date = new Date();
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const seconds = date.getSeconds();     
+
+      secHand.style.cssText = `transform: rotate(${90 + seconds*6}deg);`;
+      minHand.style.cssText = `transform: rotate(${90 + minutes*6}deg);`;
+      hourHand.style.cssText = `transform: rotate(${90 + hours*30 + 30*minutes/60}deg);`;     
+    }
+
+    setInterval(getCurrentTime, 1000);
+    getCurrentTime();
 
   </script>
 </body>
